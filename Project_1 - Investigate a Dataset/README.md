@@ -23,3 +23,11 @@ The features found in the dataset are:
 + Handcap - Is the Patient disabled?
 + SMS-Recieved - Did the Patient receive any SMS prior to the actual day of the appointment?
 + No-Show - Did the patient show or not?
+
+## Conclusion
+
+1. The number of those who show up and those who dont are relatively the same across both genders which means gender is not a very good predictor of whether people will show up or not
+2. The analysis above suggests that apart from the children, who maybe are still being taken care of by their parents, people tend to show up as their age increases. The younger ones showed up the least while the older ones showed up more
+3. Poor patients tend to not show up despite the scholarship which means the scholarship didn't really help.
+4. Patients tend not to show up on weekends, while Monday, Tuesday, and Wednesday has the highest number of turnouts
+5. The more the days pass by, the higher the tendency of patients not to show up. Most patients show up early
