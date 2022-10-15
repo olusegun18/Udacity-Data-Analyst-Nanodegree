@@ -1,4 +1,7 @@
-# Diamonds Data Exploration
+# Investigate a Dataset
+
+##
+I analyzed a dataset containing 14 features and 110,527 observations. The dataset is a collection of information from more than 100k medical appointments in Brazil and is focused on whether or not patients show up for their medical appointments. The analysis is focused on looking at the various factors that might have influenced the patients' decision to show up for their appointments or otherwise.
 
 ## Dataset
 
