@@ -5,16 +5,21 @@ I analyzed a dataset containing 14 features and 110,527 observations. The datase
 
 ## Dataset
 
-This data set contains 113,937 loans with 81 variables on each loan, including loan amount, borrower rate (or interest rate), current loan status, borrower income, and many others. The aim of this project is to use Python data science and data visualization libraries to explore the dataset’s variables and understand the data’s structure, oddities, patterns, and relationships.
+The data set used contains more than 100k medical appointments in Brazil and is focused on the question of whether or not patients show up for their appointment. It contains 14 features and 110,527 observations. The dependent variable is the "No-Show" feature and it contains two unique values - NO and YES. NO means the patient did show up for the appointment while YES means the patient didn't show up for the appointment. Further details can be found here
 
-The data can be found here [here](https://www.google.com/url?q=https://s3.amazonaws.com/udacity-hosted-downloads/ud651/prosperLoanData.csv&sa=D&ust=1581581520570000), with feature documentation available [here](https://docs.google.com/spreadsheets/d/1gDyi_L4UvIrLTEC6Wri5nbaMmkGmLQBk-Yx3z0XDEtI/edit#gid=0).
+The features found in the dataset are:
 
-
-## Summary of Findings
-
-In the exploration, I found that most people took loans for debt consolidation. About 50% of the borrowers borrowed to consolidate debt. Only about 7% took loans for business purposes. The top five states represented are CA - California, TX - Texas, NY - New York, FL - Florida, IL - Illinois. Most of the borrowers are rated C (which is low-grade); this means the credit agency took more risk than normal. I also discovered that the distribution of monthly income feature is skewed to the right while the principal feature is multi-modal but the Principal feature looked more "Normal" after a log transformation was applied. The credit agency had negative returns on some loans due to incomplete payment. But only 195 of them resulted in negative returns. More than 30% of the loans were listed in 2013 and it's by far greater than other years in the data. Usurprisingly, there is a positive relationship between the Annual Percentage Rate on the loan and return on the loan for the credit agency. Also, the data shows that the lower the rating, the more the APR and the more the likelihood of default. And lastly, borrowers rated B, C and D yielded the highest returns for the credit agency
-
-
-## Key Insights for Presentation
-
-For the presentation, I focus on just some basic introduction about the behaviour of the clients. The reason for taking the loans, the most represnted credit rating and the states the borrowers identified with. After that, I used bivariate and multivariate exploration using scatterplots and heatmaps to deduce relationships between some of the variables in the dataset.
++ PatientId - Unique ID number of the Patient
++ AppointmentID - Identification of each appointment
++ Gender - Male or Female
++ DataMaracaoConsulta - The day of the actual appointment, when they have to visit the doctor
++ DataAgendamento - The day someone called or registered the appointment, this is before appointment.
++ Age - How old the Patient is
++ Neighborhood - Where the appointment takes place
++ Scholarship - Whether or not the Patient is a benefiaciary of the social welfare program
++ Hypertension - Does the Patient have hypertension?
++ Diabetes - Is the Patient diabetic?
++ Alcoholism - Is the Patient a lover of alcohol?
++ Handcap - Is the Patient disabled?
++ SMS-Recieved - Did the Patient receive any SMS prior to the actual day of the appointment?
++ No-Show - Did the patient show or not?
