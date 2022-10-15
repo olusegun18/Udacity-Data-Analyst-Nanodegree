@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>107862</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="a-brief-report-of-the-data-wrangling-process-on-the-weratedogs-ratings-dataset" class="cell markdown">
+<h2>A BRIEF REPORT OF THE DATA WRANGLING PROCESS ON THE WeRateDogs RATINGS DATASET</h2>
+<p><br> By Joseph Osuntoki</p>
+</section>
+<section id="10--introduction" class="cell markdown">
+<h3>1.0  INTRODUCTION</h3>
+</section>
+<div class="cell markdown">
+<p>This project's objective was to gather WeRateDogs Twitter data in order to produce insightful and reliable analysis and visualizations.</p>
+<p>This project is primarily focused on manipulating data from the WeRateDogs Twitter account using Python. A final notebook (wrangle act.ipynb) was produced after the data wrangling process.</p>
+<p>The project is the second project of the Udacity Data Analyst Nanodegree program.</p>
+</div>
+<section id="20---project-requirements" class="cell markdown">
+<h3>2.0   PROJECT REQUIREMENTS</h3>
+</section>
+<div class="cell markdown">
+<p>The tweet history of Twitter user @dog rates, better known as WeRateDogs, is the dataset that used in this project.</p>
+<p>WeRateDogs is a Twitter account that rates users' dogs and adds a lighthearted comment. The denominator of these scores is almost always 10. however, the numerators are frequently more than 10 e.g. 11/10, 12/10, 13/10, etc.</p>
+<p>It is required in this project that the following objectives are met:</p>
+<ul>
+<li>Gather the data needed</li>
+<li>Assess the data</li>
+<li>Clean the data</li>
+<li>Store the data</li>
+<li>Analyzing and visualizing the data</li>
+<li>Reporting</li>
+</ul>
+</div>
+<section id="tools-and-libraries-needed" class="cell markdown">
+<h4>Tools and Libraries Needed</h4>
+</section>
+<div class="cell markdown">
+<p>A jupyter notebook is the main tool needed to complete this project. After which, some specific libraries were imported for the data wrangling process. These libraries make the process easier and more efficient.</p>
+<ol>
+<li>pandas - For effective data manipulation</li>
+<li>numpy - For performing arithmetic operations on arrays</li>
+<li>requests - To download a file from the internet programmatically</li>
+<li>json - To read the json file that was queried from Twitter</li>
+<li>matplotlib - For data visualization</li>
+<li>seaborn - An advanced data visualization library</li>
+<li>os - Provides functions for modifying folders and fetching data from them</li>
+<li>tweepy - To query the twitter API</li>
+</ol>
+</div>
+<section id="30---process-overview" class="cell markdown">
+<h3>3.0   PROCESS OVERVIEW</h3>
+</section>
+<section id="gathering-the-data" class="cell markdown">
+<h4>Gathering the Data</h4>
+</section>
+<div class="cell markdown">
+<p>Three different forms of data were used for this project, and they were acquired as described below:</p>
+<ul>
+<li><p><strong>WeRateDogs Twitter Archive File:</strong> Udacity programmatically extracted this and made twitter archive enhanced.csv available for usage.</p></li>
+<li><p><strong>Image Predictions File:</strong> According to a neural network, each tweet's image predicts the breed of dog that is present. The URL <a href="https://d17h27t6h515a5.cloudfront.net/topher/2017/August/599fd2adimage-predictions/imagepredictions.tsv" class="uri">https://d17h27t6h515a5.cloudfront.net/topher/2017/August/599fd2adimage-predictions/imagepredictions.tsv</a> was used to programmatically download the file (image predictions.tsv), which was hosted on Udacity's server.</p></li>
+<li><p><strong>Twitter API &amp; Tweet JSON File:</strong> Using the tweet IDs from the WeRateDogs Twitter archive, I used Python's tweepy module to query the Twitter API for each tweet's JSON data, and I saved the whole set of JSON data for each tweet in a file called tweet json.txt.</p></li>
+</ul>
+</div>
+<section id="assessing-the-data" class="cell markdown">
+<h4>Assessing the Data</h4>
+<p>The three files were assessed both visually and programmatically. Both assessments are useful for detecting data quality issues and data tidiness issues. <br> Data quality issues is mainly concerned completeness, validity, accuracy, and consistency. <br> Data tidiness, on the other hand is concerned with structureal issues that make analysis difficult.</p>
+</section>
+<section id="cleaning-the-data" class="cell markdown">
+<h4>Cleaning the Data</h4>
+</section>
+<div class="cell markdown">
+<p><strong>Data Quality Issues</strong></p>
+<p>I discovered the following issues during the wrangling process:</p>
+<ol>
+<li><p>Repetitive columns: having both retweet_status_id and retweet_status_user_id in the twitter_enhanced dataset creates redundancy. They are not necessary for our analysis</p></li>
+<li><p>Incorrect data types in date (twitter_enhanced), all id columns (twitter_enhanced, image, df)</p></li>
+<li><p>Incorrect data types in retweet_count and favorite_count in df table (should be integers, not float)</p></li>
+<li><p>Standard denominator value (twitter_enhanced) is 10, others should be investigated and corrected</p></li>
+<li><p>Missing values in the dog_class (twitter_enhanced)</p></li>
+<li><p>Duplicated values in jpg_url column (Image)</p></li>
+<li><p>Rating_numrator (twitter_enhanced) - values such as 1776, 666, 960, 420 are high unlikely</p></li>
+<li><p>Non-descriptive column names in image table</p></li>
+<li><p>Inconsistent format in twitter_enhaned name column (first letter should be in capital letter). Same for first, second, and third predictions in image table</p></li>
+<li><p>Iphone seems to be the major source of the data (in twitter_enhanced and df table), the rest cannot be properly interpreted</p></li>
+</ol>
+</div>
+<div class="cell markdown">
+<p><strong>Data Tidiness Issues</strong></p>
+<ol>
+<li><p>"doggo","floofer","pupper","puppo", should be melted into a single column (Twitter_enhanced)</p></li>
+<li><p>Source and tweet columns duplicated in twitter_enhanced and df table.</p></li>
+<li><p>Created_at (df) - day of the week should be separated from the time of occurrence. Created_at should be dropped as well to prevent date duplication (in tw_enhanced and df)</p></li>
+<li><p>Separate date from the hours,minutes in twitter_enhanced</p></li>
+<li><p>Let tweet_id be the first column in the df table</p></li>
+<li><p>Tweet_id in twitter_enhanced duplicated in the image and df tables</p></li>
+<li><p>Tweet_JSON (df) shoud be part of twitter_enhanced. Infact, if possible, all three should be combined into one.</p></li>
+</ol>
+</div>
+<section id="storing-the-data" class="cell markdown">
+<h4>Storing the Data</h4>
+<p>The three datasets were merged together using the merge() function on the "tweet_id" column (the only column common to all three) to create a master csv file named twitter_archive_master.csv</p>
+</section>
+<section id="analyzing-and-visualizing-the-data" class="cell markdown">
+<h4>Analyzing and Visualizing the Data</h4>
+<p>I analyzed the data and came up with some valuable insights:</p>
+<ol>
+<li><p>Only 938 dogs out of 1480 predicted dogs, were predicted with confidence greater than 50%. In second and third predictions, no dog was predicted with confidence greater than 50%</p></li>
+<li><p>The most favorite and most popular dog classes are doggo and pupper with a combined score of over 80%</p></li>
+<li><p>Golden_retriever, Labrador_retriever, and Pembroke are the most popular and favorite dog breeds</p></li>
+<li><p>There is a very strong positive corelation between favorite_count and retweet_count with about 0.93 correlation score</p></li>
+</ol>
+<p><br>I also visualized the data using the seaborn and matplotlib libraries. The visuals produced are barplots, scatter plots, and pie charts to communicate my findings</p>
+</section>
+<section id="40---conclusion" class="cell markdown">
+<h3>4.0   CONCLUSION</h3>
+<p>A skilled data wrangler is able to gather data from many sources, handle data quality and tidiness issues, and able to transform, manipulate to data to generate insightful findings. I can say, I accomplished the same in this project using all the wonderful Python libraries. I thoroughly enjoyed this project as it drove to me some uncomfortable zones but I went through it all and I'm now proud to say I'm better skilled and equipped to take up a role as a data analyst. <br> Thanks to <strong>ALX</strong> and the <strong>Udacity</strong> team for this opportunity.</p>
+</section>
+</body>
+</html>
